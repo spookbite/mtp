@@ -5,7 +5,6 @@ import scipy
 
 #st.set_page_config(layout="wide")
 st.set_page_config(page_title='MTP_19HS20057', layout='wide')
-st.set_option('deprecation.showPyplotGlobalUse', False)
 
 tokenizer = AutoTokenizer.from_pretrained("ProsusAI/finbert")
 model = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
