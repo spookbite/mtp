@@ -1,26 +1,26 @@
 import streamlit as st
-# from transformers import AutoTokenizer, AutoModelForSequenceClassification
-# import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch
 import scipy
 
 #st.set_page_config(layout="wide")
 st.set_page_config(page_title='MTP_19HS20057', layout='wide')
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-# tokenizer = AutoTokenizer.from_pretrained("ProsusAI/finbert")
-# model = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
+tokenizer = AutoTokenizer.from_pretrained("ProsusAI/finbert")
+model = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
 
-# @st.cache
-# def get_label_score(payload):
-#     inputs = tokenizer(payload, return_tensors="pt")
-#     with torch.no_grad():
-#         logits = model(**inputs).logits
-#     scores = {k: v for k, v in zip(model.config.id2label.values(
-#     ), scipy.special.softmax(logits.numpy().squeeze()))}
-#     return scores['positive'], scores['negative'], scores['neutral']
-
+@st.cache
 def get_label_score(payload):
-    return 0.8, 0.15, 0.05
+    inputs = tokenizer(payload, return_tensors="pt")
+    with torch.no_grad():
+        logits = model(**inputs).logits
+    scores = {k: v for k, v in zip(model.config.id2label.values(
+    ), scipy.special.softmax(logits.numpy().squeeze()))}
+    return scores['positive'], scores['negative'], scores['neutral']
+
+# def get_label_score(payload):
+#     return 0.8, 0.15, 0.05
 
 st.markdown("<h1 style='text-align: center;'><b>MTP_19HS20057</b></h1>", unsafe_allow_html=True)
 st.write("")
