@@ -10,7 +10,6 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 tokenizer = AutoTokenizer.from_pretrained("ProsusAI/finbert")
 model = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
 
-@st.cache
 def get_label_score(payload):
     inputs = tokenizer(payload, return_tensors="pt")
     with torch.no_grad():
